@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "minecraft_rocket_league",
+  "version": "${version}",
+  "name": "Minecraft Rocket League",
+  "description": "A Minecraft-native car-and-ball game mode with boost, bouncing physics, and survival-world compatibility.",
+  "authors": ["asiaibarra22-oss"],
+  "license": "All-Rights-Reserved",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.asiaibarra22oss.rocketleague.RocketLeagueMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
