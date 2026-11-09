@@ -13,22 +13,32 @@ public final class RocketLeagueCommands {
             dispatcher.register(Commands.literal("rl")
                 .then(Commands.literal("help").executes(context -> {
                     context.getSource().sendSuccess(
-                        () -> Component.literal("Minecraft Rocket League: /rl car and /rl ball"),
+                        () -> Component.literal("Boost Fennec prototype: /rl car spawns your ride; use a carrot on a stick to steer and boost."),
                         false
                     );
                     return Command.SINGLE_SUCCESS;
                 }))
                 .then(Commands.literal("car").executes(context -> {
-                    context.getSource().sendFailure(Component.literal(
-                        "The starter car is being rebuilt for Minecraft 26.3 and is not ready yet."
-                    ));
-                    return 0;
-                }))
-                .then(Commands.literal("ball").executes(context -> {
-                    context.getSource().sendFailure(Component.literal(
-                        "The Rocket Ball is being rebuilt for Minecraft 26.3 and is not ready yet."
-                    ));
-                    return 0;
+                    var source = context.getSource();
+                    var server = source.getServer();
+
+                    // A saddled pig is used as a temporary rideable chassis while the
+                    // custom car entity/model is developed. The unbreakable carrot-on-a-stick
+                    // uses Minecraft's built-in pig steering and boost controls.
+                    server.getCommands().performPrefixedCommand(
+                        source,
+                        "summon minecraft:pig ~ ~ ~ {Saddle:1b,PersistenceRequired:1b,CustomName:'\"Boost Fennec\"'}"
+                    );
+                    server.getCommands().performPrefixedCommand(
+                        source,
+                        "give @s minecraft:carrot_on_a_stick[minecraft:unbreakable={}] 1"
+                    );
+
+                    source.sendSuccess(
+                        () -> Component.literal("Boost Fennec spawned! Mount it, then use the carrot on a stick to steer and boost. This is a temporary pig-based prototype."),
+                        false
+                    );
+                    return Command.SINGLE_SUCCESS;
                 }))
             )
         );
