@@ -11,7 +11,8 @@ public final class RocketLeagueMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("Minecraft Rocket League is loading!");
+        RocketLeagueCommands.register();
+        LOGGER.info("Minecraft Rocket League loaded. Use /rl help.");
     }
 
     public static Identifier id(String path) {
